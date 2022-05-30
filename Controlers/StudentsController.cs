@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,6 +28,8 @@ namespace BlazorFileUploadSwagger.Controllers
         /// </summary>
         /// <param name="form">A form which contains the FormId and a file</param>
         /// <returns></returns>
+        //JwtBearerDefaults means this method will only work if a Jwt is being passed
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async void SubmitForm([FromForm] StudentForm form)
         {

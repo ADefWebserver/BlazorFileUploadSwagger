@@ -1,30 +1,72 @@
 using BlazorFileUploadSwagger.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
+using System.Security.Claims;
+using System.Security.Principal;
+using BlazorFileUploadSwagger;
+using BlazorFileUploadSwagger.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+IConfigurationSection settingsSection = builder.Configuration.GetSection("AppSettings");
+AppSettings settings = settingsSection.Get<AppSettings>();
+byte[] signingKey = Encoding.UTF8.GetBytes(settings.EncryptionKey);
+builder.Services.AddAuthentication(signingKey);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.Configure<AppSettings>(settingsSection);
+builder.Services.AddScoped<JWTAuthenticationService>();
+builder.Services.AddScoped<TokenService>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
         Title = "API",
         Description = "A simple example ASP.NET Core Web API"
     });
 
+    options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "bearerAuth"
+                    }
+                },
+                new string[] {}
+        }
+    });
+
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath, true);
+    options.IncludeXmlComments(xmlPath, true);
 });
 
 var app = builder.Build();
@@ -42,6 +84,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
