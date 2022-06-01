@@ -12,9 +12,14 @@ namespace BlazorFileUploadSwagger.Services
             this.tokenService = tokenService;
         }
 
-        public string Authenticate(ApiToken userCredentials)
+        public async Task<string> Authenticate(ApiToken userCredentials)
         {
-            string securityToken = tokenService.GetToken();
+            // **********************
+            // TO DO
+            // ACTUALLY authenticate the username and password HERE
+            // **********************
+            
+            string securityToken = await tokenService.GetToken();
 
             return securityToken;
         }

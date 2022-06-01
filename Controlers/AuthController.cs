@@ -56,7 +56,7 @@ namespace BlazorFileUploadSwagger.Controlers
             dict.Add("password", objApiToken.Password);
             dict.Add("applicationGUID", objApiToken.ApplicationGUID);
 
-            string token = authenticationService.Authenticate(objApiToken);
+            string token = await authenticationService.Authenticate(objApiToken);
             return token;
         }
         #endregion
