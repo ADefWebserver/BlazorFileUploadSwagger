@@ -14,18 +14,14 @@ using BlazorFileUploadSwagger.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// JWT Configuration
 IConfigurationSection settingsSection = builder.Configuration.GetSection("AppSettings");
 AppSettings settings = settingsSection.Get<AppSettings>();
 byte[] signingKey = Encoding.UTF8.GetBytes(settings.EncryptionKey);
 builder.Services.AddAuthentication(signingKey);
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-
-builder.Services.Configure<AppSettings>(settingsSection);
 builder.Services.AddScoped<JWTAuthenticationService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.Configure<AppSettings>(settingsSection);
 
 // Swagger Configuration
 builder.Services.AddControllers();
@@ -46,7 +42,8 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+        Description = "JWT Authorization header using the Bearer scheme. " +
+        "Example: \"Authorization: Bearer {token}\""
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -68,6 +65,10 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath, true);
 });
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
