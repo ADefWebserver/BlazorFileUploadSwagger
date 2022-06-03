@@ -45,6 +45,16 @@ namespace BlazorFileUploadSwagger.Controllers
             /// FormId
             /// </summary>
             public int FormId { get; set; }
+            
+            /// <summary>
+            /// File Attachment
+            /// </summary>
+            public IFormFile FileAttachment { get; set; }
+
+            /// <summary>
+            /// File Attachments
+            /// </summary>
+            public List<IFormFile> FileAttachments { get; set; }
         }
     }
 }

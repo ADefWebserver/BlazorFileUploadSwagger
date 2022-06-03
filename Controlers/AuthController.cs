@@ -27,7 +27,6 @@ namespace BlazorFileUploadSwagger.Controlers
         {
             public string UserName { get; set; }
             public string Password { get; set; }
-            public string ApplicationGUID { get; set; }
         }
 
         public IConfiguration _configuration;
@@ -42,7 +41,10 @@ namespace BlazorFileUploadSwagger.Controlers
 
         #region public async Task<string> GetAuthToken([FromQuery] ApiToken objApiToken)
         /// <summary>
-        /// Obtain a security token to use for subsequent calls - copy the output received and then click the Authorize button (above). Paste the contents (between the quotes) into that box and then click Authorize then close. Now the remaining methods will work.
+        /// Obtain a security token to use for subsequent calls 
+        /// Copy the output received and then click the Authorize button (above). 
+        /// Paste the contents (between the quotes) into that box and then click Authorize then close. 
+        /// Now the remaining methods will work.
         /// </summary>
         /// <param name="objApiToken"></param>
         /// <response code="200">JWT token created</response>
@@ -54,9 +56,9 @@ namespace BlazorFileUploadSwagger.Controlers
             var dict = new Dictionary<string, string>();
             dict.Add("username", objApiToken.UserName);
             dict.Add("password", objApiToken.Password);
-            dict.Add("applicationGUID", objApiToken.ApplicationGUID);
 
             string token = await authenticationService.Authenticate(objApiToken);
+            
             return token;
         }
         #endregion
