@@ -1,14 +1,14 @@
 ﻿namespace BlazorFileUploadSwagger.Models
 {
     /// <summary>
-    /// View the form submission result
+    /// Upload Form
     /// </summary>
-    public class TestForm
+    public class UploadForm
     {
         /// <summary>
-        /// FormId
+        /// File Directory
         /// </summary>
-        public int FormId { get; set; }
+        public string FileDirectory { get; set; }
 
         /// <summary>
         /// File Attachment
