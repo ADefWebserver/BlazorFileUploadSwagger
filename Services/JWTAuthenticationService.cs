@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+using BlazorFileUploadSwagger.Models;
 using Microsoft.Extensions.Options;
 using static BlazorFileUploadSwagger.Controlers.AuthController;
 
@@ -14,7 +15,7 @@ namespace BlazorFileUploadSwagger.Services
             appSettings = options.Value;
             this.tokenService = tokenService;
         }
-
+        
         public async Task<string> Authenticate(ApiToken userCredentials)
         {
             // **********************

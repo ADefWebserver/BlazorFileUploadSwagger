@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using BlazorFileUploadSwagger;
 using BlazorFileUploadSwagger.Services;
+using BlazorFileUploadSwagger.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

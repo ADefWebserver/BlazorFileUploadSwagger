@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using BlazorFileUploadSwagger.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorFileUploadSwagger.Controllers
 {
@@ -34,27 +30,6 @@ namespace BlazorFileUploadSwagger.Controllers
         {
             var id = form;
             await Task.Delay(1500);
-        }
-
-        /// <summary>
-        /// View the form submission result
-        /// </summary>
-        public class TestForm
-        {
-            /// <summary>
-            /// FormId
-            /// </summary>
-            public int FormId { get; set; }
-            
-            /// <summary>
-            /// File Attachment
-            /// </summary>
-            public IFormFile FileAttachment { get; set; }
-
-            /// <summary>
-            /// File Attachments
-            /// </summary>
-            public List<IFormFile> FileAttachments { get; set; }
-        }
+        }    
     }
 }

@@ -32,7 +32,6 @@ namespace BlazorFileUploadSwagger
 
             return services;
         }
-
         private static bool LifetimeValidator(DateTime? notBefore,
             DateTime? expires,
             SecurityToken securityToken,

@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+using BlazorFileUploadSwagger.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;

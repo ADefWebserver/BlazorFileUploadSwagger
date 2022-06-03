@@ -1,6 +1,4 @@
-﻿#pragma warning disable 1591
-
-namespace BlazorFileUploadSwagger
+﻿namespace BlazorFileUploadSwagger.Models
 {
     public class AppSettings
     {
