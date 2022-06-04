@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+// From: https://github.com/StefanescuEduard/DotnetSwaggerDocumentation/blob/master/API.WithAuthentication/Extensions/AuthenticationExtensions.cs
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
