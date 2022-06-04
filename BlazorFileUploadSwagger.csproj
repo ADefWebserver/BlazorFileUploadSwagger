@@ -14,5 +14,9 @@
 	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
 	
 </Project>
