@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+// From: https://github.com/StefanescuEduard/DotnetSwaggerDocumentation/blob/master/API.WithAuthentication/Services/TokenService.cs
 using BlazorFileUploadSwagger.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
